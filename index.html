@@ -4,9 +4,22 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>JayZilla Services</title>
   <style>
-    body { font-family:sans-serif; text-align:center; padding:50px; }
-    label, input, button, textarea { display: block; margin: 10px auto; width: 300px; max-width: 90%; }
-    #totalCost { font-size: 1.5em; font-weight: bold; margin-top: 20px; }
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      padding: 50px;
+    }
+    label, input, textarea, button {
+      display: block;
+      margin: 10px auto;
+      width: 300px;
+      max-width: 90%;
+    }
+    #totalCost {
+      font-size: 1.5em;
+      font-weight: bold;
+      margin-top: 20px;
+    }
   </style>
 </head>
 <body>
@@ -14,51 +27,34 @@
   <h2>Expedited Delivery • Same-Day Shipping • Multi-Stop Routing</h2>
   <p>Flat Rate: <strong>$1.25/mile</strong></p>
   <p>Starting Point: 4910 W 86th St, Indianapolis, IN</p>
-  <p>Booking inquiries: <a href="mailto:kingjayzilla25@gmail.com">kingjayzilla25@gmail.com</a></p> <hr style="margin: 40px 0;"> <h2>Booking Form with Automatic Mileage Calculator</h2>
+  <p>Booking inquiries: <a href="mailto:kingjayzilla25@gmail.com">kingjayzilla25@gmail.com</a></p> <hr style="margin: 40px 0;"> <h2>Booking Form</h2>
   <form id="bookingForm">
     <label for="stops">Delivery Stops (one per line):</label>
-    <textarea id="stops" rows="5" placeholder="Enter each stop address on a new line"></textarea><label for="rate">Rate per Mile ($):</label>
+    <textarea id="stops" rows="5" placeholder="Enter each stop address on a new line"></textarea><label for="totalMileage">Estimated Total Mileage:</label>
+<input type="number" id="totalMileage" placeholder="Enter estimated mileage" required />
+
+<label for="rate">Rate per Mile ($):</label>
 <input type="text" id="rate" value="1.25" disabled />
 
-<div id="totalCost">Total Cost: $0.00</div>
+<p id="totalCost"><strong>Total Cost: $0.00</strong></p>
 
-<button type="submit">Calculate Mileage and Quote</button>
+<button type="submit">Get Quote</button>
 
   </form> <script>
-    async function getMileage(addresses) {
-      const apiKey = 'YOUR_GOOGLE_MAPS_API_KEY'; // Replace with your Google Maps API key
-      let totalMiles = 0;
+    const form = document.getElementById('bookingForm');
+    const mileageInput = document.getElementById('totalMileage');
+    const totalCostSpan = document.getElementById('totalCost');
 
-      for (let i = 0; i < addresses.length - 1; i++) {
-        const origin = encodeURIComponent(addresses[i]);
-        const destination = encodeURIComponent(addresses[i + 1]);
-        const url = `https://maps.googleapis.com/maps/api/directions/json?origin=${origin}&destination=${destination}&key=${apiKey}`;
-
-        try {
-          const response = await fetch(`https://api.allorigins.win/get?url=${encodeURIComponent(url)}`);
-          const data = await response.json();
-          const parsedData = JSON.parse(data.contents);
-          const leg = parsedData.routes[0].legs[0];
-          totalMiles += leg.distance.value / 1609.34;
-        } catch (error) {
-          console.error('Error fetching mileage:', error);
-        }
-      }
-      return totalMiles;
-    }
-
-    document.getElementById('bookingForm').addEventListener('submit', async function (e) {
+    form.addEventListener('submit', function(e) {
       e.preventDefault();
-      const stopsText = document.getElementById('stops').value.trim();
-      const addresses = stopsText.split('\n').map(s => s.trim()).filter(Boolean);
-      if (addresses.length < 2) {
-        alert('Please enter at least two stops.');
-        return;
+      const mileage = parseFloat(mileageInput.value);
+      const rate = 1.25;
+      if (!isNaN(mileage)) {
+        const total = (mileage * rate).toFixed(2);
+        totalCostSpan.innerHTML = `<strong>Total Cost: $${total}</strong>`;
+      } else {
+        alert('Please enter a valid mileage value.');
       }
-
-      const miles = await getMileage(addresses);
-      const cost = (miles * 1.25).toFixed(2);
-      document.getElementById('totalCost').textContent = `Total Cost: $${cost}`;
     });
   </script></body>
 </html>
