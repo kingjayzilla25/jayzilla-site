@@ -9,16 +9,24 @@
       text-align: center;
       padding: 50px;
     }
-    label, input, textarea, button {
+    label, input, textarea, button, a {
       display: block;
       margin: 10px auto;
       width: 300px;
       max-width: 90%;
+      text-decoration: none;
     }
     #totalCost {
       font-size: 1.5em;
       font-weight: bold;
       margin-top: 20px;
+    }
+    .quote-btn {
+      background-color: #007BFF;
+      color: white;
+      padding: 12px;
+      border-radius: 6px;
+      text-align: center;
     }
   </style>
 </head>
@@ -27,34 +35,7 @@
   <h2>Expedited Delivery • Same-Day Shipping • Multi-Stop Routing</h2>
   <p>Flat Rate: <strong>$1.25/mile</strong></p>
   <p>Starting Point: 4910 W 86th St, Indianapolis, IN</p>
-  <p>Booking inquiries: <a href="mailto:kingjayzilla25@gmail.com">kingjayzilla25@gmail.com</a></p> <hr style="margin: 40px 0;"> <h2>Booking Form</h2>
-  <form id="bookingForm">
-    <label for="stops">Delivery Stops (one per line):</label>
-    <textarea id="stops" rows="5" placeholder="Enter each stop address on a new line"></textarea><label for="totalMileage">Estimated Total Mileage:</label>
-<input type="number" id="totalMileage" placeholder="Enter estimated mileage" required />
+  <p>Booking inquiries: <a href="mailto:kingjayzilla25@gmail.com">kingjayzilla25@gmail.com</a></p><a href="/quote.html" class="quote-btn">Get a Quote</a>
 
-<label for="rate">Rate per Mile ($):</label>
-<input type="text" id="rate" value="1.25" disabled />
-
-<p id="totalCost"><strong>Total Cost: $0.00</strong></p>
-
-<button type="submit">Get Quote</button>
-
-  </form> <script>
-    const form = document.getElementById('bookingForm');
-    const mileageInput = document.getElementById('totalMileage');
-    const totalCostSpan = document.getElementById('totalCost');
-
-    form.addEventListener('submit', function(e) {
-      e.preventDefault();
-      const mileage = parseFloat(mileageInput.value);
-      const rate = 1.25;
-      if (!isNaN(mileage)) {
-        const total = (mileage * rate).toFixed(2);
-        totalCostSpan.innerHTML = `<strong>Total Cost: $${total}</strong>`;
-      } else {
-        alert('Please enter a valid mileage value.');
-      }
-    });
-  </script></body>
+</body>
 </html>
