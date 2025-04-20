@@ -2,77 +2,82 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Get a Quote - JayZilla Services</title>
+  <title>Quote Request</title>
   <style>
     body {
       font-family: Arial, sans-serif;
-      padding: 40px;
-      max-width: 600px;
-      margin: auto;
+      background-color: #f4f4f4;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
     }
-    label, input, textarea, button, select {
-      display: block;
+    .form-container {
+      background: #fff;
+      padding: 30px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      max-width: 500px;
       width: 100%;
-      margin: 10px 0;
     }
-    h1, h2 {
+    h2 {
       text-align: center;
     }
-    #totalCost {
-      font-size: 1.3em;
-      font-weight: bold;
+    form {
+      display: flex;
+      flex-direction: column;
+    }
+    label {
+      margin-top: 10px;
+    }
+    input, textarea {
+      padding: 10px;
+      margin-top: 5px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+    button {
       margin-top: 20px;
+      padding: 12px;
+      background-color: #333;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #555;
     }
   </style>
 </head>
 <body>
-  <h1>JayZilla Services</h1>
-  <h2>Quote Calculator</h2>
-  <form id="bookingForm" action="https://formspree.io/f/xpzvgrrr" method="POST">
-    <label for="name">Name:</label>
-    <input type="text" id="name" name="name" placeholder="Your name" required /><label for="email">Email Address:</label>
-<input type="email" id="email" name="email" placeholder="Your email" required />
+  <div class="form-container">
+    <h2>Request a Quote</h2>
+    <form action="https://formspree.io/f/mzzenndl" method="POST">
+      <label for="name">Name:</label>
+      <input type="text" id="name" name="name" required><label for="email">Email:</label>
+  <input type="email" id="email" name="email" required>
 
-<label for="company">Company Name (if applicable):</label>
-<input type="text" id="company" name="company" placeholder="Company name (optional)" />
+  <label for="phone">Phone Number:</label>
+  <input type="text" id="phone" name="phone" required>
 
-<label for="pickupTime">Preferred Pickup Date & Time:</label>
-<input type="datetime-local" id="pickupTime" name="pickupTime" required />
+  <label for="pickup">Pickup Address:</label>
+  <input type="text" id="pickup" name="pickup" required>
 
-<label for="stops">Delivery Stops (one per line):</label>
-<textarea id="stops" name="stops" rows="5" placeholder="Enter each stop address on a new line" required></textarea>
+  <label for="dropoff">Drop-off Address:</label>
+  <input type="text" id="dropoff" name="dropoff" required>
 
-<label for="totalMileage">Estimated Total Mileage:</label>
-<input type="number" id="totalMileage" name="mileage" placeholder="Enter estimated mileage" required />
+  <label for="mileage">Estimated Mileage:</label>
+  <input type="number" id="mileage" name="mileage" step="0.1">
 
-<label for="rate">Rate per Mile ($):</label>
-<input type="text" id="rate" value="1.25" disabled />
+  <label for="notes">Additional Notes:</label>
+  <textarea id="notes" name="notes" rows="4"></textarea>
 
-<input type="hidden" id="calculatedTotal" name="calculatedTotal" value="">
-<p id="totalCost">Total Cost: $0.00</p>
+  <button type="submit">Submit Quote Request</button>
+</form>
 
-<label for="notes">Additional Instructions or Notes:</label>
-<textarea id="notes" name="notes" rows="3" placeholder="Anything else we should know?"></textarea>
-
-<button type="button" id="calculateBtn">Get Quote</button>
-<button type="submit">Submit Booking</button>
-
-  </form> <script>
-    const form = document.getElementById('bookingForm');
-    const mileageInput = document.getElementById('totalMileage');
-    const totalCostSpan = document.getElementById('totalCost');
-    const hiddenTotal = document.getElementById('calculatedTotal');
-
-    document.getElementById('calculateBtn').addEventListener('click', function() {
-      const mileage = parseFloat(mileageInput.value);
-      const rate = 1.25;
-      if (!isNaN(mileage)) {
-        const total = (mileage * rate).toFixed(2);
-        totalCostSpan.textContent = `Total Cost: $${total}`;
-        hiddenTotal.value = `$${total}`;
-      } else {
-        alert('Please enter a valid mileage value.');
-      }
-    });
-  </script></body>
+  </div>
+</body>
 </html>
