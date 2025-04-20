@@ -1,15 +1,43 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html><html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>JayZilla Services</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>JayZilla Booking</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 20px; }
+    label, input, button { display: block; margin: 10px 0; width: 100%; }
+    #stops input { margin-top: 5px; }
+  </style>
 </head>
-<body style="font-family:sans-serif; text-align:center; padding:50px;">
-  <h1>JayZilla Services LLC</h1>
-  <h2>Expedited Delivery • Same-Day Shipping • Multi-Stop Routing</h2>
-  <p>Flat Rate: <strong>$1.25/mile</strong></p>
-  <p>Starting Point: 4910 W 86th St, Indianapolis, IN</p>
-  <p>Booking inquiries: <a href="mailto:kingjayzilla25@gmail.com">kingjayzilla25@gmail.com</a></p>
-</body>
+<body>
+  <h1>JayZilla Delivery Booking</h1>
+  <form id="bookingForm">
+    <label for="stops">Delivery Stops (one per line):</label>
+    <textarea id="stops" rows="5" placeholder="Enter each stop address on a new line"></textarea><label for="totalMileage">Total Mileage:</label>
+<input type="number" id="totalMileage" placeholder="Enter estimated total mileage" />
+
+<label for="rate">Rate per Mile ($):</label>
+<input type="text" id="rate" value="1.25" disabled />
+
+<p><strong>Total Cost: $<span id="totalCost">0.00</span></strong></p>
+
+<button type="submit">Get Quote</button>
+
+  </form> <script>
+    const form = document.getElementById('bookingForm');
+    const mileageInput = document.getElementById('totalMileage');
+    const totalCostSpan = document.getElementById('totalCost');
+
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+      const mileage = parseFloat(mileageInput.value);
+      const rate = 1.25;
+      if (!isNaN(mileage)) {
+        const total = (mileage * rate).toFixed(2);
+        totalCostSpan.textContent = total;
+      } else {
+        alert('Please enter a valid mileage value.');
+      }
+    });
+  </script></body>
 </html>
