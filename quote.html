@@ -10,7 +10,7 @@
       max-width: 600px;
       margin: auto;
     }
-    label, input, textarea, button {
+    label, input, textarea, button, select {
       display: block;
       width: 100%;
       margin: 10px 0;
@@ -29,8 +29,20 @@
   <h1>JayZilla Services</h1>
   <h2>Quote Calculator</h2>
   <form id="bookingForm" action="https://formspree.io/f/xpzvgrrr" method="POST">
-    <label for="stops">Delivery Stops (one per line):</label>
-    <textarea id="stops" name="stops" rows="5" placeholder="Enter each stop address on a new line" required></textarea><label for="totalMileage">Estimated Total Mileage:</label>
+    <label for="name">Name:</label>
+    <input type="text" id="name" name="name" placeholder="Your name" required /><label for="email">Email Address:</label>
+<input type="email" id="email" name="email" placeholder="Your email" required />
+
+<label for="company">Company Name (if applicable):</label>
+<input type="text" id="company" name="company" placeholder="Company name (optional)" />
+
+<label for="pickupTime">Preferred Pickup Date & Time:</label>
+<input type="datetime-local" id="pickupTime" name="pickupTime" required />
+
+<label for="stops">Delivery Stops (one per line):</label>
+<textarea id="stops" name="stops" rows="5" placeholder="Enter each stop address on a new line" required></textarea>
+
+<label for="totalMileage">Estimated Total Mileage:</label>
 <input type="number" id="totalMileage" name="mileage" placeholder="Enter estimated mileage" required />
 
 <label for="rate">Rate per Mile ($):</label>
@@ -38,6 +50,9 @@
 
 <input type="hidden" id="calculatedTotal" name="calculatedTotal" value="">
 <p id="totalCost">Total Cost: $0.00</p>
+
+<label for="notes">Additional Instructions or Notes:</label>
+<textarea id="notes" name="notes" rows="3" placeholder="Anything else we should know?"></textarea>
 
 <button type="button" id="calculateBtn">Get Quote</button>
 <button type="submit">Submit Booking</button>
