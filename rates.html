@@ -1,48 +1,67 @@
-<!DOCTYPE html><html lang="en">
+<!DOCTYPE html>
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>JayZilla Services</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>JayZilla Services – Rates</title>
   <style>
     body {
       font-family: Arial, sans-serif;
       margin: 0;
-      padding: 0;
-      background: #f4f4f4;
+      padding: 2rem;
+      background-color: #f4f4f4;
       color: #333;
     }
-    header {
-      background: #111;
-      color: #fff;
-      padding: 1em;
+
+    header, footer {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    h1 {
+      font-size: 2em;
+      margin-bottom: 0.25rem;
+    }
+
+    .rates-container {
+      max-width: 700px;
+      margin: auto;
+      background: white;
+      padding: 2rem;
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    h2 {
+      margin-top: 2rem;
+      font-size: 1.5em;
+    }
+
+    ul {
+      padding-left: 1.5rem;
+    }
+
+    .note {
+      font-style: italic;
+      margin-top: 1rem;
+      color: #666;
+    }
+
+    .cta {
+      margin-top: 2rem;
       text-align: center;
     }
-    main {
-      padding: 2em;
-      text-align: center;
-    }
-    .cta-button {
-      margin-top: 1.5em;
-      background: #007BFF;
-      color: #fff;
-      border: none;
-      padding: 0.75em 1.5em;
-      font-size: 1em;
-      border-radius: 5px;
-      cursor: pointer;
+
+    .cta a {
       text-decoration: none;
+      background: #000;
+      color: white;
+      padding: 0.75rem 1.5rem;
+      border-radius: 5px;
     }
-    .cta-button:hover {
-      background: #0056b3;
-    }
-    footer {
-      background: #111;
-      color: #fff;
-      text-align: center;
-      padding: 1em;
-      position: fixed;
-      width: 100%;
-      bottom: 0;
+
+    .cta a:hover {
+      background: #444;
     }
   </style>
 </head>
@@ -51,14 +70,35 @@
     <h1>JayZilla Services</h1>
     <p>Powered by DBG Solutions LLC</p>
   </header>
-  <main>
-    <h2>Same-Day Delivery. Zero Emissions.</h2>
-    <p>Book reliable EV-powered delivery service across Indiana and surrounding areas.</p>
-    <a href="quote.html" class="cta-button">Get a Quote</a>
-    <a href="rates.html" class="cta-button" style="margin-left: 1em; background: #28a745;">View Rates</a>
-  </main>
+
+  <div class="rates-container">
+    <h2>Delivery Rates</h2>
+    <p>All services originate from Indianapolis, IN 46268.</p>
+    <ul>
+      <li>Flat rate: <strong>$1.25/mile</strong></li>
+      <li>Multi-stop routing included in total mileage</li>
+      <li>Return to Indy required unless otherwise arranged</li>
+      <li>Layover (if required): <strong>$150</strong> for hotel</li>
+    </ul>
+
+    <h2>Service Areas</h2>
+    <ul>
+      <li>Indianapolis</li>
+      <li>Evansville</li>
+      <li>Lafayette</li>
+      <li>Fort Wayne</li>
+      <li>Northwest Indiana (NWI)</li>
+    </ul>
+
+    <p class="note">Custom flat-rate options available upon request. Open to Illinois deliveries when needed.</p>
+
+    <div class="cta">
+      <a href="quote.html">Get a Quote</a>
+    </div>
+  </div>
+
   <footer>
-    &copy; 2024 JayZilla Services | Indianapolis, IN | kingjayzilla25@gmail.com
+    <p>&copy; 2024 JayZilla Services | Indianapolis, IN</p>
   </footer>
 </body>
 </html>
