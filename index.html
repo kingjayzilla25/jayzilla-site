@@ -1,52 +1,65 @@
-<!DOCTYPE html><html lang="en">
+<!DOCTYPE html>
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>JayZilla Services</title>
+  <title>JayZilla Services - Home</title>
   <style>
     body {
-      margin: 0;
       font-family: Arial, sans-serif;
-      background: url('delivery-hero.jpg') no-repeat center center fixed;
-      background-size: cover;
-      color: white;
+      margin: 0;
+      padding: 0;
+      background-color: #f2f2f2;
+      color: #333;
+    }
+    .header {
+      background-color: #000;
+      color: #fff;
+      padding: 2em;
       text-align: center;
     }
-    .overlay {
-      background-color: rgba(0, 0, 0, 0.6);
-      padding: 80px 20px;
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-    }
-    h1, h2, p {
-      margin: 10px 0;
-    }
-    a.quote-btn {
-      display: inline-block;
-      margin-top: 30px;
-      background-color: #007BFF;
-      color: white;
-      padding: 15px 30px;
+    .content {
+      max-width: 800px;
+      margin: 2em auto;
+      padding: 2em;
+      background: #fff;
       border-radius: 8px;
-      text-decoration: none;
-      font-size: 1.2em;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      text-align: center;
     }
-    a.quote-btn:hover {
+    .nav-button {
+      display: inline-block;
+      margin: 1em;
+      padding: 0.75em 1.5em;
+      background-color: #007bff;
+      color: #fff;
+      text-decoration: none;
+      border-radius: 5px;
+      font-weight: bold;
+    }
+    .nav-button:hover {
       background-color: #0056b3;
+    }
+    .footer {
+      text-align: center;
+      padding: 1em;
+      font-size: 0.9em;
+      color: #777;
     }
   </style>
 </head>
 <body>
-  <div class="overlay">
-    <h1>JayZilla Services LLC</h1>
-    <h2>Expedited Delivery • Same-Day Shipping • Multi-Stop Routing</h2>
-    <p>Flat Rate: <strong>$1.25/mile</strong></p>
-    <p>Starting Point: Indianapolis, IN 46268</p>
-    <p>Booking inquiries: <a href="mailto:kingjayzilla25@gmail.com" style="color: #66ccff;">kingjayzilla25@gmail.com</a></p>
-    <a href="quote.html" class="quote-btn">Get a Quote</a>
+  <div class="header">
+    <h1>JayZilla Services</h1>
+    <h3>Powered by DBG Solutions LLC</h3>
+  </div>
+  <div class="content">
+    <p>Welcome to JayZilla Services – Your trusted EV-powered delivery service for auto parts, medical supplies, and more across Indiana and beyond.</p>
+    <a href="quote.html" class="nav-button">Request a Quote</a>
+    <a href="rates.html" class="nav-button">View Rates</a>
+  </div>
+  <div class="footer">
+    Contact us: kingjayzilla25@gmail.com | (708) 488-7038 | Indianapolis, IN 46268
   </div>
 </body>
 </html>
