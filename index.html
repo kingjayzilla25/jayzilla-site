@@ -1,48 +1,91 @@
-<!DOCTYPE html><html lang="en">
+<!DOCTYPE html>
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>JayZilla Services</title>
   <style>
     body {
-      font-family: Arial, sans-serif;
       margin: 0;
-      padding: 0;
-      background: #f4f4f4;
-      color: #333;
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      color: #111;
     }
+
     header {
-      background: #111;
+      background-color: #000;
       color: #fff;
       padding: 1em;
       text-align: center;
     }
-    main {
-      padding: 2em;
-      text-align: center;
-    }
-    .cta-button {
-      margin-top: 1.5em;
-      background: #007BFF;
-      color: #fff;
-      border: none;
-      padding: 0.75em 1.5em;
-      font-size: 1em;
-      border-radius: 5px;
-      cursor: pointer;
-      text-decoration: none;
-    }
-    .cta-button:hover {
-      background: #0056b3;
-    }
-    footer {
-      background: #111;
-      color: #fff;
-      text-align: center;
-      padding: 1em;
-      position: fixed;
+
+    .hero {
       width: 100%;
+      max-height: 400px;
+      object-fit: cover;
+    }
+
+    .main-content {
+      text-align: center;
+      padding: 2em;
+    }
+
+    h2 {
+      margin-top: 0.5em;
+      font-size: 1.3em;
+    }
+
+    .mission {
+      font-style: italic;
+      color: #333;
+      margin-bottom: 2em;
+    }
+
+    .highlights {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-bottom: 2em;
+    }
+
+    .highlights p {
+      margin: 0.2em 0;
+      font-weight: bold;
+    }
+
+    .cta-button {
+      padding: 0.8em 1.2em;
+      margin: 0.5em;
+      border: none;
+      border-radius: 5px;
+      font-size: 1em;
+      cursor: pointer;
+      transition: 0.2s ease;
+    }
+
+    .cta-button:hover {
+      opacity: 0.85;
+    }
+
+    .blue {
+      background-color: #007bff;
+      color: white;
+    }
+
+    .green {
+      background-color: #28a745;
+      color: white;
+    }
+
+    footer {
+      background-color: #000;
+      color: #fff;
+      text-align: center;
+      padding: 1em;
+      font-size: 0.9em;
+      position: relative;
       bottom: 0;
+      width: 100%;
     }
   </style>
 </head>
@@ -51,12 +94,25 @@
     <h1>JayZilla Services</h1>
     <p>Powered by DBG Solutions LLC</p>
   </header>
-  <main>
+
+  <!-- Hero image -->
+  <img src="delivery-hero.jpg" alt="JayZilla Delivery Hero" class="hero" />
+
+  <div class="main-content">
     <h2>Same-Day Delivery. Zero Emissions.</h2>
-    <p>Book reliable EV-powered delivery service across Indiana and surrounding areas.</p>
-    <a href="quote.html" class="cta-button">Get a Quote</a>
-    <a href="rates.html" class="cta-button" style="margin-left: 1em; background: #28a745;">View Rates</a>
-  </main>
+    <p class="mission">Efficient, Reliable, EV-Powered Delivery — Serving Indiana & Illinois</p>
+
+    <div class="highlights">
+      <p>• Flat Rate: $1.25/mile</p>
+      <p>• Auto Parts & Medical Supplies</p>
+      <p>• Same-Day Delivery & Multi-Stop Routing</p>
+      <p>• EV-Based: Tesla Model 3</p>
+    </div>
+
+    <a href="quote.html" class="cta-button blue">Get a Quote</a>
+    <a href="rates.html" class="cta-button green">View Rates</a>
+  </div>
+
   <footer>
     &copy; 2024 JayZilla Services | Indianapolis, IN | kingjayzilla25@gmail.com
   </footer>
