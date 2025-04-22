@@ -1,60 +1,92 @@
-<!DOCTYPE html><html lang="en">
+<!DOCTYPE html>
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>JayZilla Quote Calculator</title>
+  <title>JayZilla Quote Request</title>
   <style>
     body {
       font-family: Arial, sans-serif;
-      margin: 20px;
-      background-color: #f4f4f4;
+      margin: 2em;
+      background: #f4f4f4;
     }
-    h1, h2 {
+    h1 {
       text-align: center;
     }
     form {
       max-width: 600px;
-      margin: 0 auto;
-      background: #fff;
-      padding: 20px;
+      margin: auto;
+      background: white;
+      padding: 2em;
       border-radius: 8px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     }
-    label, textarea, input, button {
-      width: 100%;
+    label {
       display: block;
-      margin-bottom: 15px;
+      margin-top: 1em;
+    }
+    input, textarea {
+      width: 100%;
+      padding: 0.5em;
+      margin-top: 0.3em;
+      border: 1px solid #ccc;
+      border-radius: 4px;
     }
     button {
-      width: auto;
-      padding: 10px 20px;
+      margin-top: 1.5em;
+      padding: 0.7em 1.2em;
       background: #007bff;
-      color: #fff;
+      color: white;
       border: none;
       border-radius: 5px;
+      cursor: pointer;
+    }
+    button:hover {
+      background: #0056b3;
     }
     .cost-display {
-      font-size: 18px;
+      margin-top: 1em;
       font-weight: bold;
-      margin-top: 10px;
+      text-align: center;
     }
   </style>
 </head>
 <body>
   <h1>JayZilla Services</h1>
-  <h2>Quote Calculator</h2> <form id="quoteForm">
-    <label>Name:<input type="text" name="name" required /></label>
-    <label>Email:<input type="email" name="email" required /></label>
-    <label>Company Name:<input type="text" name="company" /></label>
-    <label>Pickup Date & Time:<input type="datetime-local" name="pickupTime" /></label>
-    <label>Delivery Stops (one per line):<textarea id="stops" rows="4" placeholder="123 Main St, City, ST"></textarea></label>
-    <label>Estimated Total Mileage:<input type="text" id="mileage" readonly /></label>
-    <label>Rate per Mile:<input type="number" value="1.25" id="rate" readonly /></label>
+  <h2 style="text-align: center;">Quote Calculator</h2>
+
+  <form id="quoteForm">
+    <label>Name:
+      <input type="text" name="name" required />
+    </label>
+    <label>Email:
+      <input type="email" name="email" required />
+    </label>
+    <label>Company Name:
+      <input type="text" name="company" />
+    </label>
+    <label>Pickup Date & Time:
+      <input type="datetime-local" name="pickupTime" />
+    </label>
+    <label>Delivery Stops (one per line):
+      <textarea id="stops" name="stops" rows="4" placeholder="123 Main St, City, ST..."></textarea>
+    </label>
+    <label>Estimated Total Mileage:
+      <input type="text" id="mileage" name="mileage" readonly />
+    </label>
+    <label>Rate per Mile ($):
+      <input type="number" id="rate" name="rate" value="1.25" readonly />
+    </label>
+
     <div class="cost-display">Total Cost: $<span id="cost">0.00</span></div>
+
     <button type="button" onclick="calculateMileage()">Get Quote</button>
-  </form> <script>
-    const baseAddress = 'Indianapolis, IN 46268';
-    const apiKey = 'AIzaSyB0cla2RYMA65U2yCpvs7Xjr0ley1h8qtg'; // Replace with a secure method on production
+    <button type="submit">Submit Booking</button>
+  </form>
+
+  <script>
+    const baseAddress = '4910 W 86th St, Indianapolis, IN 46268';
+    const apiKey = 'AIzaSyB0cla2RYMA65U2yCpvs7Xjr0ley1h8qtg'; // Replace this securely
 
     async function calculateMileage() {
       const stopsText = document.getElementById('stops').value.trim();
@@ -73,16 +105,22 @@
         const json = await res.json();
         const data = JSON.parse(json.contents);
 
-        const totalMeters = data.routes[0].legs.reduce((sum, leg) => sum + leg.distance.value, 0);
-        const miles = totalMeters / 1609.34;
-        const cost = miles * 1.25;
+        if (data.status !== 'OK') {
+          throw new Error(data.error_message || 'API error: ' + data.status);
+        }
 
-        document.getElementById('mileage').value = miles.toFixed(2);
-        document.getElementById('cost').textContent = cost.toFixed(2);
-      } catch (err) {
-        console.error(err);
-        alert('Failed to calculate mileage.');
+        const distanceMeters = data.routes[0].legs.reduce((sum, leg) => sum + leg.distance.value, 0);
+        const mileage = (distanceMeters / 1609.34).toFixed(2);
+        const rate = parseFloat(document.getElementById('rate').value);
+        const cost = (mileage * rate).toFixed(2);
+
+        document.getElementById('mileage').value = mileage;
+        document.getElementById('cost').textContent = cost;
+      } catch (error) {
+        alert('Failed to calculate mileage: ' + error.message);
+        console.error(error);
       }
     }
-  </script></body>
+  </script>
+</body>
 </html>
