@@ -1,63 +1,36 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Get a Quote - JayZilla Services</title>
-  <style>
-    body { font-family: Arial; padding: 20px; background: #f9f9f9; }
-    form { max-width: 500px; margin: auto; }
-    input, button { width: 100%; padding: 10px; margin: 10px 0; }
-    #quoteResult { background: #eef; padding: 15px; margin-top: 20px; display: none; }
-  </style>
-</head>
-<body>
+<script>
+  async function getDeliveryQuote() {
+    const origin = document.getElementById('pickup').value;
+    const destination = document.getElementById('dropoff').value;
+    const quoteResult = document.getElementById('quoteResult');
 
-  <h1>Request a Delivery Quote</h1>
-
-  <form>
-    <input type="text" id="pickup" placeholder="Pickup Address" required>
-    <input type="text" id="dropoff" placeholder="Drop-off Address" required>
-    <button type="button" onclick="getQuote()">Get Quote</button>
-  </form>
-
-  <div id="quoteResult"></div>
-
-  <script>
-    async function getQuote() {
-      const origin = document.getElementById('pickup').value;
-      const destination = document.getElementById('dropoff').value;
-      const resultBox = document.getElementById('quoteResult');
-
-      if (!origin || !destination) {
-        resultBox.style.display = 'block';
-        resultBox.innerText = "Please enter both addresses.";
-        return;
-      }
-
-      try {
-        const response = await fetch(`/.netlify/functions/mileage-quote?origins=${encodeURIComponent(origin)}&destinations=${encodeURIComponent(destination)}`);
-        const data = await response.json();
-
-        if (data.error) {
-          resultBox.style.display = 'block';
-          resultBox.innerText = "Error fetching quote. Please try again.";
-        } else {
-          resultBox.style.display = 'block';
-          resultBox.innerHTML = `
-            From: ${data.origin} <br>
-            To: ${data.destination} <br>
-            Distance: ${data.distance} <br>
-            Time: ${data.duration} <br>
-            <strong>Estimated Price: ${data.estimated_price}</strong>
-          `;
-        }
-      } catch (err) {
-        resultBox.style.display = 'block';
-        resultBox.innerText = "Server error. Please try later.";
-      }
+    if (!origin || !destination) {
+      quoteResult.style.display = 'block';
+      quoteResult.innerText = "Please enter both pickup and drop-off locations.";
+      return;
     }
-  </script>
 
-</body>
-</html>
+    try {
+      const response = await fetch(`/functions/quote?origins=${encodeURIComponent(origin)}&destinations=${encodeURIComponent(destination)}`);
+      const data = await response.json();
+
+      if (data.error) {
+        quoteResult.style.display = 'block';
+        quoteResult.innerText = "Unable to fetch quote. Please check the addresses.";
+      } else {
+        quoteResult.style.display = 'block';
+        quoteResult.innerHTML = `
+          <strong>Delivery Quote:</strong><br>
+          From: ${data.origin} <br>
+          To: ${data.destination} <br>
+          Distance: ${data.distance} <br>
+          Estimated Time: ${data.duration} <br>
+          <strong>Price Estimate: $${data.price}</strong>
+        `;
+      }
+    } catch (err) {
+      quoteResult.style.display = 'block';
+      quoteResult.innerText = "An error occurred. Please try again.";
+    }
+  }
+</script>
