@@ -1,82 +1,85 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>JayZilla Services - Get a Quote</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 20px;
-            background-color: #f9f9f9;
-        }
-        h1 {
-            text-align: center;
-        }
-        form {
-            max-width: 500px;
-            margin: auto;
-        }
-        input, button {
-            width: 100%;
-            padding: 10px;
-            margin: 10px 0;
-        }
-        #quoteResult {
-            background-color: #eef;
-            border: 1px solid #ccc;
-            padding: 15px;
-            margin-top: 20px;
-            display: none;
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>JayZilla Services – Get a Delivery Quote</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f9f9f9;
+      padding: 20px;
+    }
+    h1 {
+      text-align: center;
+      color: #333;
+    }
+    form {
+      max-width: 500px;
+      margin: 0 auto;
+    }
+    input, button {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      font-size: 16px;
+    }
+    #quoteResult {
+      background-color: #eef;
+      border: 1px solid #ccc;
+      padding: 15px;
+      margin-top: 20px;
+      display: none;
+    }
+  </style>
 </head>
 <body>
 
-    <h1>Request a Delivery Quote</h1>
-    <form>
-        <input type="text" id="pickup" placeholder="Enter Pickup Address" required>
-        <input type="text" id="dropoff" placeholder="Enter Drop-off Address" required>
-        <button type="button" onclick="getDeliveryQuote()">Get Delivery Quote</button>
-    </form>
+  <h1>Request a Delivery Quote</h1>
+  <form>
+    <input type="text" id="pickup" placeholder="Enter Pickup Address" required />
+    <input type="text" id="dropoff" placeholder="Enter Drop-off Address" required />
+    <button type="button" onclick="getDeliveryQuote()">Get Delivery Quote</button>
+  </form>
 
-    <div id="quoteResult"></div>
+  <div id="quoteResult"></div>
 
-    <script>
-        async function getDeliveryQuote() {
-            const origin = document.getElementById('pickup').value;
-            const destination = document.getElementById('dropoff').value;
+  <script>
+    async function getDeliveryQuote() {
+      const origin = document.getElementById('pickup').value;
+      const destination = document.getElementById('dropoff').value;
+      const quoteResult = document.getElementById('quoteResult');
 
-            if (!origin || !destination) {
-                document.getElementById('quoteResult').style.display = 'block';
-                document.getElementById('quoteResult').innerText = "Please enter both pickup and drop-off locations.";
-                return;
-            }
+      if (!origin || !destination) {
+        quoteResult.style.display = 'block';
+        quoteResult.innerText = "Please enter both pickup and drop-off locations.";
+        return;
+      }
 
-            try {
-                const response = await fetch(`https://d7e37ca0-9381-47e9-8487-8e8d93d4733b-00-110n8wqrgv9m0.worf.replit.dev/maps-api?origins=${encodeURIComponent(origin)}&destinations=${encodeURIComponent(destination)}`);
-                const data = await response.json();
+      try {
+        const response = await fetch(`https://d7e37ca0-9381-47e9-8487-8e8d93d4733b-00-110n8wqrgv9m0.worf.replit.dev/maps-api?origins=${encodeURIComponent(origin)}&destinations=${encodeURIComponent(destination)}`);
+        const data = await response.json();
 
-                if (data.error) {
-                    document.getElementById('quoteResult').style.display = 'block';
-                    document.getElementById('quoteResult').innerText = "Unable to fetch quote. Please check the addresses.";
-                } else {
-                    document.getElementById('quoteResult').style.display = 'block';
-                    document.getElementById('quoteResult').innerHTML = `
-                        <strong>Delivery Quote:</strong><br>
-                        From: ${data.origin} <br>
-                        To: ${data.destination} <br>
-                        Distance: ${data.distance} <br>
-                        Estimated Time: ${data.duration} <br>
-                        <strong>Price Estimate: ${data.estimated_price}</strong>
-                    `;
-                }
-            } catch (err) {
-                document.getElementById('quoteResult').style.display = 'block';
-                document.getElementById('quoteResult').innerText = "An error occurred. Please try again.";
-            }
+        if (data.error) {
+          quoteResult.style.display = 'block';
+          quoteResult.innerText = "Unable to fetch quote. Please check the addresses.";
+        } else {
+          quoteResult.style.display = 'block';
+          quoteResult.innerHTML = `
+            <strong>Delivery Quote:</strong><br>
+            From: ${data.origin} <br>
+            To: ${data.destination} <br>
+            Distance: ${data.distance} <br>
+            Estimated Time: ${data.duration} <br>
+            <strong>Price Estimate: ${data.estimated_price}</strong>
+          `;
         }
-    </script>
+      } catch (error) {
+        quoteResult.style.display = 'block';
+        quoteResult.innerText = "An error occurred. Please try again.";
+      }
+    }
+  </script>
 
 </body>
 </html>
