@@ -4,29 +4,41 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Book a Delivery - JayZilla Services</title>
-    <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_GOOGLE_MAPS_API_KEY&libraries=places"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB0cla2RYMA65U2yCpvs7Xjr0ley1h8qtg&libraries=places"></script>
     <script defer src="booking.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
 </head>
 <body class="bg-gray-100 text-gray-900">
     <main class="container mx-auto mt-10">
         <h2 class="text-2xl font-bold mb-6 text-center">Book Your Delivery</h2>
-        <form action="https://formspree.io/f/yourformid" method="POST" class="bg-white p-8 rounded shadow-md max-w-xl mx-auto">
-            <label class="block mb-4">Pickup Location:
-                <input type="text" id="pickup" name="pickup" class="w-full border p-2 mt-1" required>
-            </label>
-            <label class="block mb-4">Drop-off Location:
-                <input type="text" id="dropoff" name="dropoff" class="w-full border p-2 mt-1" required>
-            </label>
-            <p class="mb-4">Estimated Mileage: <span id="mileage">0</span> miles</p>
-            <p class="mb-4">Estimated Price: $<span id="price">0.00</span></p>
+        <form action="https://formspree.io/f/mzzenndl" method="POST" class="bg-white p-8 rounded shadow-md max-w-xl mx-auto">
             <label class="block mb-4">Your Name:
                 <input type="text" name="name" class="w-full border p-2 mt-1" required>
             </label>
             <label class="block mb-4">Email:
                 <input type="email" name="email" class="w-full border p-2 mt-1" required>
             </label>
-            <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded">Submit Booking</button>
+            <label class="block mb-4">Phone Number (Optional):
+                <input type="text" name="phone" class="w-full border p-2 mt-1">
+            </label>
+            <label class="block mb-4">Appointment Date & Time:
+                <input type="datetime-local" name="appointment" class="w-full border p-2 mt-1" required>
+            </label>
+            <label class="block mb-4">Pickup Location:
+                <input type="text" id="pickup" name="pickup" class="w-full border p-2 mt-1" required>
+            </label>
+            <label class="block mb-4">Drop-off Location:
+                <input type="text" id="dropoff" name="dropoff" class="w-full border p-2 mt-1" required>
+            </label>
+            <label class="block mb-4">Notes:
+                <textarea name="notes" class="w-full border p-2 mt-1" rows="3" placeholder="Any special instructions..."></textarea>
+            </label>
+            <div class="mt-4">
+                <p>Estimated Mileage: <span id="mileage">0</span> miles</p>
+                <p>Estimated Price: $<span id="price">0.00</span></p>
+            </div>
+            <button type="button" id="calculate" class="bg-green-500 text-white px-4 py-2 rounded mt-4">Calculate Price</button>
+            <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded mt-4 ml-2">Submit Booking</button>
         </form>
     </main>
 </body>
