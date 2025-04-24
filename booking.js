@@ -27,3 +27,27 @@ document.getElementById('calculate').addEventListener('click', () => {
         }
     });
 });
+
+// Handle Form Submission via AJAX
+document.getElementById('bookingForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+
+    const formData = new FormData(this);
+
+    fetch('https://formspree.io/f/mzzenndl', {
+        method: 'POST',
+        headers: { 'Accept': 'application/json' },
+        body: formData
+    }).then(response => {
+        if (response.ok) {
+            document.getElementById('confirmationMessage').innerText = 
+                "Thank you! We have received your booking request and will contact you shortly.";
+            document.getElementById('confirmationMessage').classList.remove('hidden');
+            this.reset();
+            document.getElementById('mileage').innerText = "0";
+            document.getElementById('price').innerText = "0.00";
+        } else {
+            alert('There was an issue submitting your booking. Please try again.');
+        }
+    });
+});
