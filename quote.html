@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Get a Quote - JayZilla Services</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      padding: 20px;
+    }
+    h1 {
+      text-align: center;
+      color: #333;
+    }
+    form {
+      max-width: 500px;
+      margin: auto;
+      background: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    input, button {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      font-size: 16px;
+    }
+    #quoteResult {
+      margin-top: 20px;
+      padding: 15px;
+      background-color: #e0f7fa;
+      border: 1px solid #00796b;
+      display: none;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Request Your Delivery Quote</h1>
+
+  <form>
+    <input type="text" id="pickup" placeholder="Pickup Address" required>
+    <input type="text" id="dropoff" placeholder="Drop-off Address" required>
+    <button type="button" onclick="getDeliveryQuote()">Get Quote</button>
+  </form>
+
+  <div id="quoteResult"></div>
+
+  <script>
+    async function getDeliveryQuote() {
+      const origin = document.getElementById('pickup').value;
+      const destination = document.getElementById('dropoff').value;
+      const quoteBox = document.getElementById('quoteResult');
+
+      if (!origin || !destination) {
+        quoteBox.style.display = 'block';
+        quoteBox.innerText = "Please enter both addresses.";
+        return;
+      }
+
+      try {
+        const response = await fetch(`YOUR_NETLIFY_FUNCTION_URL?origins=${encodeURIComponent(origin)}&destinations=${encodeURIComponent(destination)}`);
+        const data = await response.json();
+
+        if (data.error) {
+          quoteBox.style.display = 'block';
+          quoteBox.innerText = "Unable to calculate quote. Please check the addresses.";
+        } else {
+          quoteBox.style.display = 'block';
+          quoteBox.innerHTML = `
+            <strong>Quote Details:</strong><br>
+            From: ${data.origin}<br>
+            To: ${data.destination}<br>
+            Distance: ${data.distance}<br>
+            Estimated Time: ${data.duration}<br>
+            <strong>Estimated Price: ${data.estimated_price}</strong>
+          `;
+        }
+      } catch (error) {
+        quoteBox.style.display = 'block';
+        quoteBox.innerText = "An unexpected error occurred. Please try again.";
+      }
+    }
+  </script>
+
+</body>
+</html>
