@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Get a Quote - JayZilla Services</title>
+    <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_GOOGLE_MAPS_API_KEY&libraries=places"></script>
+    <script defer src="quote.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100 text-gray-900">
+    <main class="container mx-auto mt-10">
+        <h2 class="text-2xl font-bold mb-6 text-center">Get a Quick Quote</h2>
+        <div class="bg-white p-8 rounded shadow-md max-w-xl mx-auto">
+            <label class="block mb-4">Pickup Location:
+                <input type="text" id="pickup" class="w-full border p-2 mt-1" required>
+            </label>
+            <div id="stops">
+                <label class="block mb-4">Drop-off Location:
+                    <input type="text" class="dropoff w-full border p-2 mt-1" required>
+                </label>
+            </div>
+            <button id="addStop" class="bg-gray-500 text-white px-4 py-2 rounded mb-4">Add Another Stop</button>
+            <div class="mt-4">
+                <p>Estimated Mileage: <span id="mileage">0</span> miles</p>
+                <p>Estimated Price: $<span id="price">0.00</span></p>
+            </div>
+            <button id="calculate" class="bg-green-500 text-white px-4 py-2 rounded mt-4">Calculate Quote</button>
+        </div>
+    </main>
+</body>
+</html>
